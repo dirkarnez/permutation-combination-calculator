@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+      <link
+        rel="stylesheet"
+        href="https://fred-wang.github.io/MathFonts/LatinModern/mathfonts.css" />
+      <script src="https://fred-wang.github.io/mathjax.js/mpadded-min.js"></script>
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+      <style>
+          textarea {
+              width: 100%;
+          }
+      </style>
+  </head>
+  <body>
+    Pyodide test page <br>
+    Open your browser console to see Pyodide output
+ 	  <textarea id="textarea_input" rows="10" placeholder="Once upon a time..."></textarea>
+    <br>
+    <button id="btn_sample">sample</button>
+    <button id="btn_submit">Submit</button>
+    <br>
+    <div id="console_output"></div>
+    <script type="text/javascript">
+      (() => {
+        const worker = new Worker('worker.js');
+        worker.onmessage = function(e) {
+          consoleOutput.innerHTML += `${e.data}<br>`;
+        }
+        
+        const defaultCode = `import scipy.integrate as integrate
+  import scipy.special as special
+  print(integrate.quad(lambda x: special.jv(2.5,x), 0, 4.5))
+  `;
+          const consoleOutput = document.getElementById("console_output");
+       	  const textareaInput = document.getElementById("textarea_input");
+          textareaInput.value = defaultCode;
+        
+          document.getElementById("btn_submit").addEventListener("click", function() {
+              consoleOutput.innerHTML = "";
+              worker.postMessage([textareaInput.value]);
+          });
+  
+          document.getElementById("btn_sample").addEventListener("click", function() {
+             textareaInput.value = `
+  `;
+          });
+      })()
+    </script>
+  </body>
+</html>
