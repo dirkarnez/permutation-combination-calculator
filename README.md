@@ -1,4 +1,4 @@
-[permutation-combination-calculator](https://dirkarne/github.io/permutation-combination-calculator)
+[permutation-combination-calculator](https://dirkarnez.github.io/permutation-combination-calculator)
 ===================================================================================================
 Electronic calculators cannot list permutations / combinations it calculates
 
