@@ -13,11 +13,13 @@
       </style>
   </head>
   <body>
-    Pyodide test page <br>
+    <a href="https://github.com/dirkarnez/permutation-combination-calculator">dirkarnez/permutation-combination-calculator</a><br>
+    Pyodide test page<br>
     Open your browser console to see Pyodide output
  	  <textarea id="textarea_input" rows="10" placeholder="Once upon a time..."></textarea>
     <br>
-    <button id="btn_sample">sample</button>
+    <button id="btn_permutations_sample">Permutations sample</button>
+    <button id="btn_combinations_sample">Combinations sample</button>
     <button id="btn_submit">Submit</button>
     <br>
     <div id="console_output"></div>
@@ -28,23 +30,30 @@
           consoleOutput.innerHTML += `${e.data}<br>`;
         }
         
-        const defaultCode = `import scipy.integrate as integrate
-  import scipy.special as special
-  print(integrate.quad(lambda x: special.jv(2.5,x), 0, 4.5))
-  `;
-          const consoleOutput = document.getElementById("console_output");
-       	  const textareaInput = document.getElementById("textarea_input");
-          textareaInput.value = defaultCode;
-        
-          document.getElementById("btn_submit").addEventListener("click", function() {
-              consoleOutput.innerHTML = "";
-              worker.postMessage([textareaInput.value]);
-          });
-  
-          document.getElementById("btn_sample").addEventListener("click", function() {
-             textareaInput.value = `
-  `;
-          });
+        const consoleOutput = document.getElementById("console_output");
+        const textareaInput = document.getElementById("textarea_input");
+      
+        document.getElementById("btn_submit").addEventListener("click", function() {
+            consoleOutput.innerHTML = "";
+            worker.postMessage([ textareaInput.value ]);
+        });
+
+        document.getElementById("btn_permutations_sample").addEventListener("click", function() {
+           textareaInput.value = `import itertools
+           
+print(list(itertools.permutations([1, 2, 3])))
+
+print(list(itertools.permutations("RLC", 2)))
+`;
+        });
+
+        document.getElementById("btn_combinations_sample").addEventListener("click", function() {
+           textareaInput.value = `import itertools
+print(list(itertools.combinations([1, 2, 3])))
+
+print(list(itertools.combinations("RLC", 2)))
+`;
+        });
       })()
     </script>
   </body>
