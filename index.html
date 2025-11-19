@@ -18,8 +18,8 @@
     Open your browser console to see Pyodide output
  	  <textarea id="textarea_input" rows="10" placeholder="Once upon a time..."></textarea>
     <br>
-    <button id="btn_permutations_sample">Permutations sample</button>
-    <button id="btn_combinations_sample">Combinations sample</button>
+    <button id="btn-sample-1">Sample 1</button>
+    <button id="btn-sample-2">Sample 2</button>
     <button id="btn_submit">Submit</button>
     <br>
     <div id="console_output"></div>
@@ -38,20 +38,13 @@
             worker.postMessage([ textareaInput.value ]);
         });
 
-        document.getElementById("btn_permutations_sample").addEventListener("click", function() {
-           textareaInput.value = `import itertools
-           
-print(list(itertools.permutations([1, 2, 3])))
-
-print(list(itertools.permutations("RLC", 2)))
+        document.getElementById("btn-sample-1").addEventListener("click", function() {
+           textareaInput.value = `
 `;
         });
 
-        document.getElementById("btn_combinations_sample").addEventListener("click", function() {
-           textareaInput.value = `import itertools
-print(list(itertools.combinations([1, 2, 3], 2)))
-
-print(list(itertools.combinations("RLC", 2)))
+        document.getElementById("btn-sample-2").addEventListener("click", function() {
+           textareaInput.value = `
 `;
         });
       })()
